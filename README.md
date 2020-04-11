@@ -1,6 +1,8 @@
 # Minesweeper
 
 Simple console version of the classic 60's Minesweeper game.
+
+https://en.wikipedia.org/wiki/Minesweeper_(video_game)
                           
 ## Installation
 

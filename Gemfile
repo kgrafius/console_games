@@ -7,4 +7,6 @@ gem 'curb'
 gem 'rspec'
 gem 'rspec-core'
 
+gem 'rubocop'
+
 gem 'colorize'
