@@ -12,7 +12,7 @@ To run the game locally:
 
     git clone <this repo>
     bundle      
-    ruby minesweeper.rb /?
+    ruby console_game.rb
   
 ## License
 
