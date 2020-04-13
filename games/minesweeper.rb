@@ -12,12 +12,13 @@ module Games
     def initialize(**params)
       super(**{renderer_class: ::Games::Renderers::MinesweeperRendererAscii,
                cell_class: MineCell}.merge(params))
+      @mine_count = [1, (rows * cols * params[:difficulty].to_f).to_i].max
     end
 
     def play
       say "Welcome to Minesweeper"
       puts minesweeper_welcome
-      renderer.render
+      render
       loop do
         input = STDIN.gets.chomp
         command, x, y = input.split /\s/
@@ -26,9 +27,7 @@ module Games
           c = cell(x, y)
           unless mines_planted?
             # This will ensure that the first move will never land on a mine
-            plant_mines(difficulty: params[:difficulty].to_f,
-                        safe_x: x,
-                        safe_y: y)
+            plant_mines(safe_x: x, safe_y: y)
             calc_live_neighbors
           end
 
@@ -54,6 +53,7 @@ module Games
     end
 
     def won?
+      puts "won? - Minecount (#{mine_count}), Unvisited(#{unvisited_count})"
       mine_count >= unvisited_count
     end
 
@@ -67,20 +67,16 @@ module Games
       board_grid.any? { |r| r.any? { |c| c.live? } }
     end
 
-    def plant_mines(difficulty:,
-                    safe_x: nil,
-                    safe_y: nil)
-      safe_x = Array(safe_x)
-      safe_y = Array(safe_y)
-      @mine_count = (rows * cols * difficulty).to_i
+    def plant_mines(safe_x: -1, safe_y: -1)
       planted = 0
       while planted < mine_count
         x = rand(0...rows)
         y = rand(0...cols)
-        unless safe_x.include?(x) && safe_y.include?(y)
-          cell(x, y).live = true
-          planted += 1
-        end
+        next if safe_x.to_i == x && safe_y.to_i == y
+
+        puts "Planting mine at (#{x}, #{y}) with safe_cell(#{safe_x}, #{safe_y})"
+        cell(x, y).live = true
+        planted += 1
       end
     end
 
