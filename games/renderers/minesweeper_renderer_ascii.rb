@@ -6,7 +6,7 @@ module Games
 
       def render
         # clear
-        header
+        heading
         status
         puts
         minefield
@@ -48,8 +48,8 @@ module Games
         str
       end
 
-      def header
-        puts <<-HEADER
+      def heading
+        puts <<-HEADING
     Game Rules:
     To win, all non-mine cells must be uncovered and all mine cells must be flagged. Opening a live cell 
     containing a mine immediately terminates the game. An uncovered cell containing a number indicate the 
@@ -58,7 +58,7 @@ module Games
       open x y - opens a cell, if the cell does not contain a mine, then all surrounding empty cells are opened   
       flag x y - flags a cell as containing a mine
 
-        HEADER
+        HEADING
       end
 
       def status
