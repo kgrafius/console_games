@@ -6,7 +6,7 @@ Dir.glob("#{GAME_DIR}/*.rb").each do |f|
   require_relative "games/#{File.basename(f, ".rb")}"
 end
 
-class ConsoleGame
+class ConsoleGames
   include ArgParser::DSL
 
   purpose <<-EOT
@@ -39,4 +39,4 @@ class ConsoleGame
   end
 end
 
-ConsoleGame.new.run
+ConsoleGames.new.run
