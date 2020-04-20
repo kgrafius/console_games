@@ -3,7 +3,6 @@
 Simple console app that allows play of a number of console based games including:
 
 * Minesweeper
-* Tic Tac Toe
 
 https://en.wikipedia.org/wiki/Minesweeper_(video_game)
                           
